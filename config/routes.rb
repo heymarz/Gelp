@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   get '/user', to: 'users#show'
   
   resources :reviews, only: [:index]
