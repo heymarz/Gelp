@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { Routes, Route } from 'react-router-dom';
 import NavBar from "./components/navigation/NavBar";
+import Login from "./components/pages/Login";
+import AddReview from "./components/pages/AddReview";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -10,9 +12,9 @@ function App() {
     <main>
       <NavBar user={user} setUser={setUser} />
       <Routes>
-        <Route path="/" />
+        <Route path="/" element={<Login />} />
 
-        <Route path="/new" />
+        <Route path="/addReview" element={<AddReview />}/>
       </Routes>
     </main>
   );
