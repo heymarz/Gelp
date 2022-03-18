@@ -71,5 +71,6 @@ I had also deployed my API on Heroku. If you would like to see it in that enviro
 
 https://github.com/learn-co-curriculum/project-template-react-rails-api
 
+https://medium.com/@jvolpe721/using-the-faker-gem-ff3d58ecb2c
 
 
