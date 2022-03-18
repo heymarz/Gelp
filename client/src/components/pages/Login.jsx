@@ -2,7 +2,7 @@ import React from 'react'
 
 function Login (){
   return (
-    <h1>This is the log in form</h1>
+    <h1>This is the log in</h1>
   )
 }
 
