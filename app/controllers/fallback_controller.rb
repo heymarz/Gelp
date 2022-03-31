@@ -3,7 +3,8 @@
 class FallbackController < ActionController::Base
 
   def index
-    # React app index page
-    render file: 'public/index.html'
+    respond_to do |format|
+      format.html { render body: Rails.root.join('client/public/index.html').read }
+    end
   end
 end
