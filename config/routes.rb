@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
+  get '/users/:id', to: 'users#index'
+  
   post '/signup', to: 'users#create'
-  get '/me', to: 'users#show'
-
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
   resources :restaurants, only: [:index, :create]
   
-  resources :reviews, only: [:index, :show,:create]
+  resources :reviews, only: [:index, :show, :create]
 
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end

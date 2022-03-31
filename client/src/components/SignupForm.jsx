@@ -1,39 +1,34 @@
-import React, {useState, useEffect} from 'react';
-import {headers} from '../Global'
+import React, {useState} from 'react';
+import {headers} from '../Global';
 
-function SignupForm({ loginUser, addErrors, clearErrors }) {
+function SignupForm({ loginUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   
   function handleSubmit(e){
     e.preventDefault();
-    fetch("/users", {
+    
+    fetch("/signup", {
       method: "POST",
-      headers,
+      headers: headers,
       body: JSON.stringify({
-        username,
-        password,
-        passwordConfirmation: passwordConfirmation,
-      }),
+        user: {
+          username: username,
+          password: password,
+          password_confirmation: passwordConfirmation,
+      }}),
     })
-    .then((r)=> {
-      if (r.ok) {
-        r.json().then((user)=>loginUser(user));
-        //add nav link
-      } else {
-        r.json().then((err)=> addErrors(err));
-      }
+    .then((r)=> r.json())
+    .then(data=>{
+    loginUser(data);
+      //add nav link
     });
   }
-  
-  useEffect(()=>{
-    return()=>{
-      clearErrors();
-    }
-  },[])
 
   return (
+   <div>
+    <h1>Sign up Form</h1>
     <form onSubmit = {handleSubmit}>
       <label htmlFor="usename">Username:</label>
       <input 
@@ -45,7 +40,7 @@ function SignupForm({ loginUser, addErrors, clearErrors }) {
         onChange = {(e)=>setUsername(e.target.value)}
       />
       <br />
-      <label htmlFor = "password">Password</label>
+      <label htmlFor = "password">Password:</label>
       <input
         type = "password"
         id = "password"
@@ -65,6 +60,7 @@ function SignupForm({ loginUser, addErrors, clearErrors }) {
       <br />
       <button type="submit">Sign up</button>
     </form>
+   </div>
   )
 }
 

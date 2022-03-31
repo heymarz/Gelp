@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {headers} from '../Global';
 // import {useNavigate} from "react-router-dom"
 
-function LoginForm({ loginUser, addErrors, clearErrors }) {
+function LoginForm({ loginUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -10,29 +10,25 @@ function LoginForm({ loginUser, addErrors, clearErrors }) {
 
   function handleSubmit(e){
     e.preventDefault();
-    fetch('/login',{
+    fetch('http://localhost:3000/login',{
       method: "POST",
       headers,
       body: JSON.stringify({
-        username, password,
+        username: username,
+        password: password,
       }),
-    }).then((r)=>{
-      if(r.ok){
-        r.json().then((user)=>loginUser(user));
-        // navigate("/")
-      }else{
-        addErrors(["Invalid username or password"])
-      }
+    })
+    .then((r)=>r.json())
+    .then(data=>{
+      loginUser(data.user);
+      // navigate("/")
     })
   }
-
-  useEffect(()=>{
-    return()=>{
-      clearErrors();
-    }
-  })
+  
 
   return (
+   <div>
+    <h1>Log in</h1>
     <form onSubmit={handleSubmit}>
       <label htmlFor="username">Username</label>
       <input
@@ -45,14 +41,16 @@ function LoginForm({ loginUser, addErrors, clearErrors }) {
       <br />
       <label htmlFor="password">Password</label>
       <input
-        type="password"
-        id="password"
-        autoComplete='current-password'
+        type = "password"
+        id = "password"
         value={password}
         onChange={(e)=>setPassword(e.target.value)}
+        autoComplete='current-password'
       />
+      <br />
       <button type="submit">Sign In</button>
     </form>
+   </div>
   )
 }
 

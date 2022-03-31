@@ -1,10 +1,18 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize, only: :create
+  # before_action :authorized, only: :show
+  def index
+    render json: User.all
+  end
 
   def create
-    user = User.create!(user_params)
+    user = User.create(user_params)
+    binding.pry
     session[:user_id] = user.id
-    render json: user, status: :created
+    if user.valid?
+      render json: user, status: :created
+    else
+      render json: { error: user.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def show
@@ -13,7 +21,11 @@ class UsersController < ApplicationController
   end
 
   private
+  def authorized
+    return render json: {error: "Not Authorized"}, status: :unauthorized unless session.include? :user_id
+  end
+
   def user_params
-    params.permit(:username, :password, :password_confirmation)
+    params.require(:user).permit(:username, :password, :password_confirmation)
   end
 end

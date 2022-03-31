@@ -1,15 +1,15 @@
 class ReviewsController < ApplicationController
   def index
-    render json: Reviews.all
+    render json: Review.all
   end
 
   def show
-    restaurant = Review.find_by(id: review_params[:id])
-    render json: restaurant, include: [:restaurants, :user]
+    restaurant_review = Review.find_by(id: review_params[:id])
+    render json: restaurant_review
   end
 
   def create
-    restaurant_review = Restaurant.review.create!(review_params)
+    restaurant_review = Restaurant.review.create(review_params)
     render json: restaurant_review, status: :created
   end
 

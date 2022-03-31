@@ -9,7 +9,7 @@ function Login ({loginUser, addErrors, clearErrors}){
     <div>
       {showLogin ? (
         <>
-          <LoginForm loginUser={loginUser} addErrors={addErrors} clearErrors={clearErrors} />
+          <LoginForm loginUser={loginUser} />
           <br />
           <p>
             Don't have an account? &nbsp;
@@ -18,7 +18,7 @@ function Login ({loginUser, addErrors, clearErrors}){
         </>
       ) : (
         <>
-          <SignupForm loginUser={loginUser} addErrors={addErrors} clearErrors={clearErrors} />
+          <SignupForm loginUser={loginUser} />
           <br />
           <p>
             Already have an account? &nbsp;
