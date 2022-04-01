@@ -15,12 +15,9 @@ function RestaurantListing() {
       <h4>Restaurant Listing</h4>
       {restaurants.map((r)=>{
     return <div className="card" key={r.id}>
-        <h3>Name:</h3>
-        <p>{r.name}</p>
-        <h4>Food Type:</h4>
-        <p>{r.food_type}</p>
-        <h4>Restaurant Description:</h4>
-        <p>{r.description}</p>
+        <h4>{r.name}</h4>
+        <p><em><b>Food Type:</b>{r.food_type}</em></p>
+        <p><b>Restaurant Description:</b><br />{r.description}</p>
       </div>
       })
     }
