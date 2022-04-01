@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get '/users/:id', to: 'users#index'
+  get '/users', to: 'users#index'
+  get '/users/:id', to: 'users#show'
   
   post '/signup', to: 'users#create'
   post '/login', to: 'sessions#create'
