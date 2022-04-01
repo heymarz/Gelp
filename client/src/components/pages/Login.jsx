@@ -1,15 +1,21 @@
 import React, {useState} from 'react';
 import SignupForm from '../SignupForm';
 import LoginForm from '../LoginForm';
+import Errors from '../static/Errors'
 
-function Login ({loginUser, addErrors, clearErrors}){
-  const [showLogin, setShowLogin] = useState(true)
+function Login ({loginUser}){
+  const [showLogin, setShowLogin] = useState(true);
+  const [errors, setErrors] = useState([]);
+
+  function addErrors(errors){
+    setErrors(errors)
+  }
 
   return (
     <div>
       {showLogin ? (
         <>
-          <LoginForm loginUser={loginUser} />
+          <LoginForm loginUser={loginUser} addErrors={addErrors} />
           <br />
           <p>
             Don't have an account? &nbsp;
@@ -18,7 +24,7 @@ function Login ({loginUser, addErrors, clearErrors}){
         </>
       ) : (
         <>
-          <SignupForm loginUser={loginUser} />
+          <SignupForm loginUser={loginUser} addErrors={setErrors}/>
           <br />
           <p>
             Already have an account? &nbsp;
@@ -26,6 +32,7 @@ function Login ({loginUser, addErrors, clearErrors}){
           </p>
         </>
       )}
+      <Errors errors={errors}/>
     </div>
   )
 }

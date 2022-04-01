@@ -1,30 +1,35 @@
 import React, {useState} from 'react';
 import {headers} from '../Global';
-// import {useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 
-function LoginForm({ loginUser }) {
+function LoginForm({ loginUser, addErrors }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // const navigate = useNavigate(0)
+  let navigate = useNavigate()
 
   function handleSubmit(e){
     e.preventDefault();
-    fetch('http://localhost:3000/login',{
+
+    fetch('/login',{
       method: "POST",
-      headers,
+      headers: headers,
       body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
+        user: { 
+          username: username,
+          password: password,
+      }}),
     })
     .then((r)=>r.json())
-    .then(data=>{
-      loginUser(data.user);
-      // navigate("/")
+    .then(data=>{ 
+      if (data.id){
+        loginUser(data);
+        navigate('/');
+      } else {
+        addErrors(["Please check the spelling of your username or password. Case-Sensitive!"])
+      }
     })
   }
-  
 
   return (
    <div>

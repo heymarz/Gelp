@@ -1,30 +1,36 @@
 import React, {useState} from 'react';
 import {headers} from '../Global';
+import {useNavigate} from "react-router-dom"
 
-function SignupForm({ loginUser }) {
+function SignupForm({ loginUser, addErrors }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  let navigate = useNavigate()
   
   function handleSubmit(e){
     e.preventDefault();
-    
-    fetch("/signup", {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify({
-        user: {
-          username: username,
-          password: password,
-          password_confirmation: passwordConfirmation,
-      }}),
-    })
+
+    if(password === passwordConfirmation){
+      fetch("/signup", {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify({
+          user: {
+            username: username,
+            password: password,
+            password_confirmation: passwordConfirmation,
+        }}),
+      })
     .then((r)=> r.json())
     .then(data=>{
-    loginUser(data);
-      //add nav link
-    });
-  }
+      loginUser(data);
+      navigate("/");
+      })
+    } else {
+        addErrors(["Please try again."])
+      }
+    }
 
   return (
    <div>
