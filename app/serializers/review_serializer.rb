@@ -1,5 +1,5 @@
 class ReviewSerializer < ActiveModel::Serializer
-  attributes :id, :review_description, :rating, :restaurant_id, :user_id
+  attributes :id, :rating, :restaurant_id, :user_id, :review_description
 
   # has_one :user
 end
