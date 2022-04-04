@@ -9,11 +9,12 @@ import SignupForm from "./components/SignupForm";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [restaurants, setRestaurants] = useState("")
 
   function loginUser(user){
-    setCurrentUser(user)
-    setLoggedIn(true)
+    setCurrentUser(user);
+    setLoggedIn(true);
   }
 
   function logoutUser(){
@@ -31,7 +32,7 @@ function App() {
         <Routes>
           <Route 
             path="/" 
-            element={<Home loggedIn={loggedIn}/>} 
+            element={<Home loggedIn={loggedIn}  restaurants={restaurants} setRestaurants={setRestaurants} />} 
           />
           <Route 
             path="/signup" 
@@ -47,7 +48,7 @@ function App() {
           />
           <Route 
             path="/reviews/new" 
-            element={<AddReview currentUser={currentUser} />} 
+            element={<AddReview currentUser={currentUser} restaurants={restaurants}/>} 
           />
         </Routes>
       </main>
