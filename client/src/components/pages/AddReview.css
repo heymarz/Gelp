@@ -2,3 +2,11 @@
   height: 100px;
   width: 500px
 }
+
+.star {
+  cursor: pointer;
+  transition: color 200ms;
+}
+input[type="radio"] {
+  display: none;
+}
