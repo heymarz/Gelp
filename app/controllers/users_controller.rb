@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  # before_action :authorized, only: [:show]
+  before_action :authorized, only: [:show]
   
   def index
     render json: User.all
@@ -11,7 +11,7 @@ class UsersController < ApplicationController
     if user.valid?
       render json: user, status: :created
     else
-      render json: { error: user.errors.full_messages }, status: :unprocessable_entity
+      render json: { error: user.errors.full_messages.join(", ") }, status: :unprocessable_entity
     end
   end
 
@@ -21,9 +21,6 @@ class UsersController < ApplicationController
   end
 
   private
-  # def authorized
-  #   return render json: {error: "Not Authorized"}, status: :unauthorized unless session.include? :user_id
-  # end
 
   def user_params
     params.require(:user).permit(:username, :password, :password_confirmation)
