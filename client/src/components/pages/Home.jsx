@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react'
-import RestaurantListing from '../RestaurantListing'
+import RestaurantListing from './RestaurantListing'
 
 function Home({ loggedIn, restaurants, setRestaurants }){
 
@@ -13,7 +13,7 @@ function Home({ loggedIn, restaurants, setRestaurants }){
     <div>
       <h1>Welcome to Gelp!</h1>
       <h3>This is a website that you can count on. Rate restaurants and their services. Share your thoughts and opinions with Restuarant reviews! Can't wait to hear your thoughts! Happy Gelping!</h3>
-      {loggedIn? <RestaurantListing restaurants={restaurants} setRestaurants={setRestaurants} /> : <p>Please sign in at the link above.</p>}
+      {loggedIn? <RestaurantListing restaurants={restaurants} /> : <p>Please sign in at the link above.</p>}
     </div>
   )
 }
