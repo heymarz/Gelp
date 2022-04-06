@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {headers} from '../Global';
-import {useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom";
+import Errors from './static/Errors';
 
-function SignupForm({ loginUser, addErrors }) {
+function SignupForm({ loginUser, addErrors, errors }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -11,7 +12,6 @@ function SignupForm({ loginUser, addErrors }) {
   function handleSubmit(e){
     e.preventDefault();
 
-    if(password === passwordConfirmation){
       fetch("/signup", {
         method: "POST",
         headers: headers,
@@ -24,13 +24,15 @@ function SignupForm({ loginUser, addErrors }) {
       })
     .then((r)=> r.json())
     .then(data=>{
+      if(data.id){
       loginUser(data);
       navigate("/");
-      })
-    } else {
-        addErrors(["Please try again."])
+      }else{
+      addErrors([data.error])
       }
-    }
+    })
+  } 
+    
 
   return (
    <div>
@@ -66,6 +68,7 @@ function SignupForm({ loginUser, addErrors }) {
       <br />
       <button type="submit">Sign up</button>
     </form>
+    <Errors errors={errors} />
    </div>
   )
 }

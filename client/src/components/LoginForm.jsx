@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {headers} from '../Global';
-import {useNavigate} from "react-router-dom"
+import {useNavigate} from "react-router-dom";
+import Errors from './static/Errors';
 
-function LoginForm({ loginUser, addErrors }) {
+function LoginForm({ loginUser, addErrors, errors }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -55,6 +56,7 @@ function LoginForm({ loginUser, addErrors }) {
       <br />
       <button type="submit">Sign In</button>
     </form>
+    <Errors errors={errors} />
    </div>
   )
 }
