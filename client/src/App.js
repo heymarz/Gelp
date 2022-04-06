@@ -2,10 +2,11 @@ import React from "react";
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from "./components/navigation/NavBar";
-import LoginForm from './components/LoginForm'
+import LoginForm from './components/static/LoginForm'
 import AddReview from "./components/pages/AddReview";
 import Home from "./components/pages/Home";
-import SignupForm from "./components/SignupForm";
+import SignupForm from "./components/static/SignupForm";
+import RestaurantDetails from "./components/pages/RestaurantDetails";
 
 
 function App() {
@@ -75,7 +76,15 @@ function App() {
               />
             } 
           />
-        </Routes>
+        <Route 
+            path="restaurants/:id" 
+            element={
+              <RestaurantDetails
+              
+              />
+            } 
+            />
+            </Routes>
       </main>
     </Router>
   );

@@ -4,7 +4,7 @@ import { FaStar } from "react-icons/fa";
 import { headers } from '../../Global';
 import { useParams, useNavigate } from 'react-router-dom';
 
-function AddReview({currentUser}) {
+function AddReview({ currentUser, restaurants }) {
   const [description, setDescription] = useState("");
   const [rating, setRating] =useState(null);
   const [hover, setHover] = useState(null);
@@ -26,10 +26,16 @@ function AddReview({currentUser}) {
     .then((r)=> r.json())
     .then(navigate('/'))
   }
+
+  const renderingRestaurant = restaurants.map((rest)=>{
+    if (id === rest.id){
+      console.log(rest.name)
+    }
+  })
   
   return (
     <div className="reviewBody">
-      <h1>Add a new review for ...</h1>
+      <h1>Add a new review for {renderingRestaurant}</h1>
       <form onSubmit={handleAddReview}>
         <h3><label htmlFor='description' id="textbox">Write your review in the box below:</label></h3>
         <div>

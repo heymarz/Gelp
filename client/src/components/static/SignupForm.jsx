@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {headers} from '../Global';
+import {headers} from '../../Global';
 import {useNavigate} from "react-router-dom";
-import Errors from './static/Errors';
+import Errors from './Errors';
 
 function SignupForm({ loginUser, addErrors, errors }) {
   const [username, setUsername] = useState("");

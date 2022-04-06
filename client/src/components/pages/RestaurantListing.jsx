@@ -8,6 +8,10 @@ function RestaurantListing({restaurants}) {
   function handleAddReview(id){
     navigate(`/restaurants/${id}/reviews/new`) 
   }
+
+  function showDetails(id){
+    navigate(`/restaurants/${id}`)
+  }
   
   return (
     <div>
@@ -16,10 +20,12 @@ function RestaurantListing({restaurants}) {
       {restaurants.map((r)=>{
         return (
           <div className="card" key={r.id}>
-            <h4>{r.name}</h4>
-            <p><em><b>Food Type:</b>{r.food_type}</em></p>
-            <p><b>Restaurant Description:</b><br />{r.description}</p>
-            <button onClick={()=>handleAddReview(r.id)}>Add a review</button>
+            <div onClick={()=>showDetails(r.id)}>
+              <h4>{r.name}</h4>
+              <p><em><b>Food Type:</b>{r.food_type}</em></p>
+              <p><b>Restaurant Description:</b><br />{r.description}</p>
+            </div>
+              <button onClick={()=>handleAddReview(r.id)}>Add a review</button>
           </div>
           )
       })}
