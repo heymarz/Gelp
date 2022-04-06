@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    restaurant_review = Restaurant.review.create(review_params)
+    restaurant_review = Review.create(review_params)
     render json: restaurant_review, status: :created
   end
 

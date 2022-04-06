@@ -2,15 +2,21 @@ import React from "react";
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from "./components/navigation/NavBar";
-import Login from "./components/pages/Login";
+import LoginForm from './components/LoginForm'
 import AddReview from "./components/pages/AddReview";
 import Home from "./components/pages/Home";
 import SignupForm from "./components/SignupForm";
 
+
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  const [restaurants, setRestaurants] = useState("")
+  const [restaurants, setRestaurants] = useState("");
+  const [errors, setErrors] = useState([]);
+
+  function addErrors(errors){
+    setErrors(errors)
+  }
 
   function loginUser(user){
     setCurrentUser(user);
@@ -32,23 +38,42 @@ function App() {
         <Routes>
           <Route 
             path="/" 
-            element={<Home loggedIn={loggedIn}  restaurants={restaurants} setRestaurants={setRestaurants} />} 
+            element={
+              <Home 
+                loggedIn={loggedIn}  
+                restaurants={restaurants} 
+                setRestaurants={setRestaurants} 
+              />
+            } 
           />
           <Route 
             path="/signup" 
-            element={<SignupForm 
-              loginUser={loginUser}
-            />} 
+            element={
+              <SignupForm 
+                errors={errors}
+                loginUser={loginUser}
+                addErrors={addErrors}
+              />
+            } 
           />
           <Route 
             path="/login"  
-            element={<Login 
-              loginUser={loginUser}
-            />} 
+            element={
+              <LoginForm 
+                errors={errors}
+                loginUser={loginUser}
+                addErrors={addErrors}
+              />
+            } 
           />
           <Route 
-            path="/reviews/new" 
-            element={<AddReview currentUser={currentUser} restaurants={restaurants}/>} 
+            path="restaurants/:id/reviews/new" 
+            element={
+              <AddReview 
+                currentUser={currentUser}
+                restaurants={restaurants}
+              />
+            } 
           />
         </Routes>
       </main>
