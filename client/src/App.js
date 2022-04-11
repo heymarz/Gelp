@@ -29,6 +29,11 @@ function App() {
     setLoggedIn(false);
   }
 
+  function onDeleteReview(id){
+    const updateReview = restaurants.reviews.filter((rev)=> rev.id !== id);
+    console.log(updateReview) 
+  }
+
   return (
     <Router>
       <NavBar 
@@ -68,7 +73,7 @@ function App() {
             } 
           />
           <Route 
-            path="restaurants/:id/reviews/new" 
+            path="restaurants/:restaurant_id/reviews/new" 
             element={
               <AddReview 
                 currentUser={currentUser}
@@ -77,10 +82,11 @@ function App() {
             } 
           />
         <Route 
-            path="restaurants/:id" 
+            path="restaurants/:restaurant_id" 
             element={
               <RestaurantDetails
-              
+                currentUser={currentUser}
+                onDeleteReview={onDeleteReview}
               />
             } 
             />

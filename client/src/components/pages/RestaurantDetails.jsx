@@ -2,24 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './restaurantDetails.css'
 
-function RestaurantDetails() {
+function RestaurantDetails({ currentUser, onDeleteReview }) {
   const [currentRestaurant, setCurrentRestaurant] = useState([]);
+  // const [isEditing, setIsEditing] = useState("");
+  // const [rating, setRating] = useState("")
   const {name, food_type, description, reviews} = currentRestaurant
-  let { id } = useParams();
+  let { restaurant_id } = useParams();
   
   useEffect(()=>{
-    fetch(`/restaurants/${id}`)
+    fetch(`/restaurants/${restaurant_id}`)
     .then((r)=>r.json())
     .then((data)=>setCurrentRestaurant(data))
   },[])
 
-//   {id: 1, name: 'Smokestack Shakes', food_type: 'European', description: 'Our mission is to be a leader in the distribution …ssential components in accomplishing our mission.', reviews: Array(5)}
-// description: "Our mission is to be a leader in the distribution and merchandising of food, pharmacy, health and personal care items, seasonal merchandise, and related products and services. We place considerable importance on forging strong supplier partnerships. Our suppliers, large or small, local or global, are essential components in accomplishing our mission."
-// food_type: "European"
-// id: 1
-// name: "Smokestack Shakes"
-// reviews: (5) [{…}, {…}, {…}, {…}, {…}]
-console.log(currentRestaurant)
+  function handleDelete(id){
+    fetch(`/reviews/${id}`,{
+      method: "DELETE",
+    }).then((r)=>{
+        onDeleteReview(id)
+    })
+  }
+
   return (
     <div>
       <div>
@@ -32,11 +35,10 @@ console.log(currentRestaurant)
               <div className="reviewContainer" key={review.id}>
                 <div>{review.rating}</div>
                 <p>{review.review_description}</p>
-                
+                {currentUser.id === review.user_id ? <span><button>Edit</button><button onClick={()=>handleDelete(review.id)}>Delete</button></span> : null}
               </div>
             )
           })}
-          {/* edit and delete buttons, if currentuser.id === review.user_id, show buttons */}
         </ul>
       </div>
     </div>

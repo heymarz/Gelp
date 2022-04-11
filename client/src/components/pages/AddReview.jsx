@@ -8,17 +8,17 @@ function AddReview({ currentUser, restaurants }) {
   const [description, setDescription] = useState("");
   const [rating, setRating] =useState(null);
   const [hover, setHover] = useState(null);
-  let { id } = useParams();
+  let { restaurant_id } = useParams();
   let navigate = useNavigate()
 
   function handleAddReview(e){
     e.preventDefault();
-    fetch(`/restaurants/${id}/reviews/new`, {
+    fetch(`restaurants/${restaurant_id}/reviews/new`, {
       method: "POST",
       headers: headers,
       body: JSON.stringify({
         user_id: currentUser.id,
-        restaurant_id: id,
+        restaurant_id: restaurant_id,
         review_description: description,
         rating: rating
       })
@@ -27,9 +27,9 @@ function AddReview({ currentUser, restaurants }) {
     .then(navigate('/'))
   }
 
-  const renderingRestaurant = restaurants.map((rest)=>{
-    if (id === rest.id){
-      console.log(rest.name)
+  const renderingRestaurant = restaurants.filter((rest)=>{
+    if (restaurant_id === rest.id){
+      return rest.id
     }
   })
   
