@@ -17,7 +17,7 @@ function RestaurantListing({restaurants}) {
     <div>
       <h4>Restaurant Listing</h4>
       {/* add a new restaurant button here and should navigate to the form page */}
-      {restaurants.map((r)=>{
+      {restaurants && restaurants.map((r)=>{
         return (
           <div className="card" key={r.id}>
             <div onClick={()=>showDetails(r.id)}>

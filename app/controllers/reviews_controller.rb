@@ -22,7 +22,7 @@ class ReviewsController < ApplicationController
   def destroy
     review = find_review
     review.destroy
-    head: no_content
+    head :no_content
   end
 
   private
