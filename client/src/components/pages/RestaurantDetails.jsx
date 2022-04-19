@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './restaurantDetails.css'
+import EditReview from './EditReview';
+import { FaStar } from 'react-icons/fa'
 
-function RestaurantDetails({ currentUser, onDeleteReview }) {
+function RestaurantDetails({ currentUser, onUpdateReview, onDeleteReview }) {
   const [currentRestaurant, setCurrentRestaurant] = useState([]);
-  // const [isEditing, setIsEditing] = useState("");
-  // const [rating, setRating] = useState("")
+  const [isEditing, setIsEditing] = useState(false);
   const {name, food_type, description, reviews} = currentRestaurant
-  let { restaurant_id } = useParams();
+  let {restaurant_id} = useParams();
   
   useEffect(()=>{
     fetch(`/restaurants/${restaurant_id}`)
@@ -15,30 +16,41 @@ function RestaurantDetails({ currentUser, onDeleteReview }) {
     .then((data)=>setCurrentRestaurant(data))
   },[])
 
-  function handleDelete(id){
-    fetch(`/reviews/${id}`,{
+  function handleDelete(restaurant_id, review_id){
+    fetch(`/reviews/${review_id}`,{
       method: "DELETE",
     }).then((r)=>{
-        onDeleteReview(id)
+        onDeleteReview(restaurant_id, review_id)
     })
   }
 
   return (
     <div>
       <div>
-        <h1>{name}</h1><br />
-        <h2><em>{food_type}</em></h2>
-        <h3>{description}</h3>
-        <ul>
-          {reviews && reviews.map((review)=>{
+        <h1>{name}</h1>
+        <h3><em>{food_type}</em></h3>
+        <p>{description}</p>
+        <h2>Reviews:</h2>
+        {isEditing ? (<EditReview review={isEditing} onUpdateReview={onUpdateReview}/>) : (<div>{reviews && reviews.map((review)=>{
+            return(
+              <div className="reviewContainer" key={review.id}>
+                <div>{review.rating}
+              </div>
+                <p>{review.review_description}</p>
+                {currentUser.id === review.user_id ? <span><button onClick={()=>setIsEditing(review)}>Edit</button><button onClick={()=>handleDelete(review.id)}>Delete</button></span> : null}
+              </div>
+            )
+          })}</div>)}
+          {/* {reviews && reviews.map((review)=>{
             return(
               <div className="reviewContainer" key={review.id}>
                 <div>{review.rating}</div>
                 <p>{review.review_description}</p>
-                {currentUser.id === review.user_id ? <span><button>Edit</button><button onClick={()=>handleDelete(review.id)}>Delete</button></span> : null}
+                {currentUser.id === review.user_id ? <span><button onClick={()=>handleEditReview(review)}>Edit</button><button onClick={()=>handleDelete(review.id)}>Delete</button></span> : null}
               </div>
             )
-          })}
+          })} */}
+        <ul>
         </ul>
       </div>
     </div>

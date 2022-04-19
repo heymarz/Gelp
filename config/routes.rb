@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   resources :restaurants, only: [:index, :show, :create]
   
   resources :reviews
-  post '/restaurants/:restaurant_id/reviews/new', to: 'reviews#create'
-  delete 'reviews/:id', to: 'reviews#destroy'
+  post '/restaurants/:restaurant_id/reviews', to: 'reviews#create'
+  delete 'reviews/:review_id', to: 'reviews#destroy'
   patch '/restaurants/:restaurant_id/reviews/:review_id', to: 'reviews#update'
 
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

@@ -13,7 +13,7 @@ function AddReview({ currentUser, restaurants }) {
 
   function handleAddReview(e){
     e.preventDefault();
-    fetch(`restaurants/${restaurant_id}/reviews/new`, {
+    fetch(`/restaurants/${restaurant_id}/reviews`, {
       method: "POST",
       headers: headers,
       body: JSON.stringify({
@@ -27,15 +27,10 @@ function AddReview({ currentUser, restaurants }) {
     .then(navigate('/'))
   }
 
-  const renderingRestaurant = restaurants.filter((rest)=>{
-    if (restaurant_id === rest.id){
-      return rest.id
-    }
-  })
   
   return (
     <div className="reviewBody">
-      <h1>Add a new review for {renderingRestaurant}</h1>
+      <h1>Add a new review...</h1>
       <form onSubmit={handleAddReview}>
         <h3><label htmlFor='description' id="textbox">Write your review in the box below:</label></h3>
         <div>

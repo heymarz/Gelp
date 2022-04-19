@@ -5,12 +5,12 @@ import {useNavigate} from 'react-router-dom';
 function RestaurantListing({restaurants}) {
   let navigate = useNavigate()
 
-  function handleAddReview(id){
-    navigate(`/restaurants/${id}/reviews/new`) 
+  function handleAddReview(restaurant_id){
+    navigate(`/restaurants/${restaurant_id}/reviews/new`) 
   }
 
-  function showDetails(id){
-    navigate(`/restaurants/${id}`)
+  function showDetails(restaurant_id){
+    navigate(`/restaurants/${restaurant_id}`)
   }
   
   return (
