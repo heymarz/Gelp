@@ -14,7 +14,7 @@ fvy_house = Restaurant.create(name:"FVY House", food_type: "French", description
 
 smokestack.reviews.create(review_description: "Big fan of the briskets. I've come here a couple of times and they always come out perfect!", user_id: mike.id, rating: rand(1..5))
 hal_pub.reviews.create(review_description: "Fantastic service. Ask for Vinny. Gives the best pours and hal's pub makes a fantastic burger and crinkle cut fries. The sauce that comes with it is just heaven.", user_id: cassandra.id, rating: rand(1..5))
-dbj_grill.reviews.create(review_description: "The meat selection is always fresh and grilled to perfection. Service is friendly and on point.", user_id: roger.id, rating: rand(1..5))
+kbj_grill.reviews.create(review_description: "The meat selection is always fresh and grilled to perfection. Service is friendly and on point.", user_id: roger.id, rating: rand(1..5))
 silver_juice_bar.reviews.create(review_description: "I recommend the Mango Madness smoothie. It is sweet and yet so refreshing. Service is friendly and quick. I usually come here to study with my friends or meet up here for the nice ambience.", user_id: sarah.id, rating: rand(1..5))
 fvy_house.reviews.create(review_description: "Modern space with okay service. I had the pontine fries and a snapper fish as my entree.", user_id: cassandra.id, rating: rand(1..5))
 
