@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './restaurantDetails.css'
 import EditReview from './EditReview';
-import { FaStar } from 'react-icons/fa'
 
-function RestaurantDetails({ currentUser, onUpdateReview, onDeleteReview }) {
+function RestaurantDetails({ currentUser, onUpdateReview }) {
   const [currentRestaurant, setCurrentRestaurant] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const {name, food_type, description, reviews} = currentRestaurant
   let {restaurant_id} = useParams();
+  const navigate = useNavigate()
   
   useEffect(()=>{
     fetch(`/restaurants/${restaurant_id}`)
@@ -16,11 +16,12 @@ function RestaurantDetails({ currentUser, onUpdateReview, onDeleteReview }) {
     .then((data)=>setCurrentRestaurant(data))
   },[])
 
-  function handleDelete(restaurant_id, review_id){
+  function handleDelete(review_id){
     fetch(`/reviews/${review_id}`,{
       method: "DELETE",
-    }).then((r)=>{
-        onDeleteReview(restaurant_id, review_id)
+    }).then(()=>{
+    onUpdateReview(currentRestaurant.id, review_id)
+    navigate(0)
     })
   }
 
