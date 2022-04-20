@@ -12,7 +12,7 @@ import RestaurantDetails from "./components/pages/RestaurantDetails";
 function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  const [restaurants, setRestaurants] = useState("");
+  const [restaurants, setRestaurants] = useState([]);
   const [errors, setErrors] = useState([]);
 
   function addErrors(errors){
@@ -29,10 +29,19 @@ function App() {
     setLoggedIn(false);
   }
 
-  function onDeleteReview(id){
-    const updateReview = restaurants.reviews.filter((rev)=> rev.id !== id);
-    console.log(updateReview) 
-  }
+  function onUpdateReview (reviewId, restaurantId, newRating, newComment){
+    const copy = [...restaurants];
+    for (const restaurant of copy){
+      if(restaurant.id === restaurantId){
+        const review = restaurant.reviews.find((rev)=>rev.id === reviewId
+        );
+        review.rating = newRating;
+        review.comment = newComment;
+      }
+    } 
+    setRestaurants(copy)
+  };
+
 
   return (
     <Router>
@@ -86,7 +95,7 @@ function App() {
             element={
               <RestaurantDetails
                 currentUser={currentUser}
-                onDeleteReview={onDeleteReview}
+                onUpdateReview={onUpdateReview}
               />
             } 
             />
