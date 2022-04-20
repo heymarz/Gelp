@@ -86,7 +86,6 @@ function App() {
             element={
               <AddReview 
                 currentUser={currentUser}
-                restaurants={restaurants}
               />
             } 
           />
@@ -98,8 +97,12 @@ function App() {
                 onUpdateReview={onUpdateReview}
               />
             } 
-            />
-            </Routes>
+          />
+           <Route 
+            path="*" 
+            element={<ErrorPage />} 
+          />
+        </Routes>
       </main>
     </Router>
   );
