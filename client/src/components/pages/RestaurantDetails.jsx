@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import './restaurantDetails.css'
+import './restaurantList.css'
 import EditReview from './EditReview';
 
 function RestaurantDetails({ currentUser, onUpdateReview }) {
@@ -27,30 +27,21 @@ function RestaurantDetails({ currentUser, onUpdateReview }) {
 
   return (
     <div>
-      <div>
-        <h1>{name}</h1>
+      <div className='body'>
+        <h1 className="restaurant-title">{name}</h1>
         <h3><em>{food_type}</em></h3>
         <p>{description}</p>
-        <h2>Reviews:</h2>
+        <h2 className='opposing-title'>Reviews:</h2>
         {isEditing ? (<EditReview review={isEditing} onUpdateReview={onUpdateReview}/>) : (<div>{reviews && reviews.map((review)=>{
             return(
               <div className="reviewContainer" key={review.id}>
                 <div>{review.rating}
               </div>
                 <p>{review.review_description}</p>
-                {currentUser.id === review.user_id ? <span><button onClick={()=>setIsEditing(review)}>Edit</button><button onClick={()=>handleDelete(review.id)}>Delete</button></span> : null}
+                {currentUser.id === review.user_id ? <span><button className="button" onClick={()=>setIsEditing(review)}>Edit</button><button className="button" onClick={()=>handleDelete(review.id)}>Delete</button></span> : null}
               </div>
             )
           })}</div>)}
-          {/* {reviews && reviews.map((review)=>{
-            return(
-              <div className="reviewContainer" key={review.id}>
-                <div>{review.rating}</div>
-                <p>{review.review_description}</p>
-                {currentUser.id === review.user_id ? <span><button onClick={()=>handleEditReview(review)}>Edit</button><button onClick={()=>handleDelete(review.id)}>Delete</button></span> : null}
-              </div>
-            )
-          })} */}
         <ul>
         </ul>
       </div>

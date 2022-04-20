@@ -21,11 +21,11 @@ function RestaurantListing({restaurants}) {
         return (
           <div className="card" key={r.id}>
             <div onClick={()=>showDetails(r.id)}>
-              <h4>{r.name}</h4>
+              <h4 className='restaurant-title'>{r.name}</h4>
               <p><em><b>Food Type:</b>{r.food_type}</em></p>
               <p><b>Restaurant Description:</b><br />{r.description}</p>
             </div>
-              <button onClick={()=>handleAddReview(r.id)}>Add a review</button>
+              <button className="button" onClick={()=>handleAddReview(r.id)}>Add a review</button>
           </div>
           )
       })}

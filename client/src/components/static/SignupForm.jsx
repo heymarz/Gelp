@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {headers} from '../../Global';
 import {useNavigate} from "react-router-dom";
 import Errors from './Errors';
+import './forms.css'
 
 function SignupForm({ loginUser, addErrors, errors }) {
   const [username, setUsername] = useState("");
@@ -35,10 +36,10 @@ function SignupForm({ loginUser, addErrors, errors }) {
     
 
   return (
-   <div>
-    <h1>Sign up Form</h1>
+   <div className="form">
+    <h1 className="small-header">Sign up Form</h1>
     <form onSubmit = {handleSubmit}>
-      <label htmlFor="usename">Username:</label>
+      <label htmlFor="usename">Username: </label>
       <input 
         type = "text"
         id = "username"
@@ -48,7 +49,7 @@ function SignupForm({ loginUser, addErrors, errors }) {
         onChange = {(e)=>setUsername(e.target.value)}
       />
       <br />
-      <label htmlFor = "password">Password:</label>
+      <label htmlFor = "password">Password: </label>
       <input
         type = "password"
         id = "password"
@@ -57,7 +58,7 @@ function SignupForm({ loginUser, addErrors, errors }) {
         autoComplete = "current-password"
       />
       <br />
-      <label htmlFor="password">Password Confirmation:</label>
+      <label htmlFor="password">Password Confirmation: </label>
       <input
         type = "password"
         id = "password_confirmation"
@@ -66,7 +67,7 @@ function SignupForm({ loginUser, addErrors, errors }) {
         autoComplete = "current-password"
       />
       <br />
-      <button type="submit">Sign up</button>
+      <button className="button" type="submit">Sign up</button>
     </form>
     <Errors errors={errors} />
    </div>

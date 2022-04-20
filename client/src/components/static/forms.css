@@ -1,0 +1,29 @@
+.form{
+  padding: 35px;
+}
+.small-header{
+  padding: 0, 10px, 10px, 45px;
+  color:aquamarine;
+  background: #FFFFFF;
+  text-shadow: 2px 2px 0 #4074b5, 2px -2px 0 #4074b5, -2px 2px 0 #4074b5, -2px -2px 0 #4074b5, 2px 0px 0 #4074b5, 0px 2px 0 #4074b5, -2px 0px 0 #4074b5, 0px -2px 0 #4074b5;
+}
+.button {
+  color: white; 
+  height: 30px;
+  font-size: 13px; 
+  line-height: 15px; 
+  padding: 7px 7px 2px 7px; 
+  border-radius: 5px; 
+  font-family: Georgia, serif; 
+  font-weight: normal; 
+  text-decoration: none; 
+  font-style: normal; 
+  font-variant: normal; 
+  text-transform: none; 
+  background-image: linear-gradient(to right, rgb(64, 227, 245) 0%, rgb(102, 228, 247) 50%, rgb(72, 176, 245) 100%); 
+}
+
+.button:hover {
+background: rgb(64, 227, 245); }
+.button:active {
+background: aqua; }

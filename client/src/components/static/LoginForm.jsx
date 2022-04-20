@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {headers} from '../../Global';
 import {useNavigate} from "react-router-dom";
 import Errors from './Errors';
+import './forms.css'
+import '../pages/restaurantList.css'
 
 function LoginForm({ loginUser, addErrors, errors }) {
   const [username, setUsername] = useState("");
@@ -33,10 +35,10 @@ function LoginForm({ loginUser, addErrors, errors }) {
   }
 
   return (
-   <div>
-    <h1>Log in</h1>
+   <div className='form'>
+    <h1 className='small-header'>Log in</h1>
     <form onSubmit={handleSubmit}>
-      <label htmlFor="username">Username</label>
+      <label htmlFor="username">Username: </label>
       <input
         type="text"
         id="username"
@@ -45,7 +47,7 @@ function LoginForm({ loginUser, addErrors, errors }) {
         onChange={(e)=>setUsername(e.target.value)}
       />
       <br />
-      <label htmlFor="password">Password</label>
+      <label htmlFor="password">Password: </label>
       <input
         type = "password"
         id = "password"
@@ -54,7 +56,7 @@ function LoginForm({ loginUser, addErrors, errors }) {
         autoComplete='current-password'
       />
       <br />
-      <button type="submit">Sign In</button>
+      <button className="button" type="submit">Sign In</button>
     </form>
     <Errors errors={errors} />
    </div>

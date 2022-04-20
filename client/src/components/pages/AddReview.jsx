@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import './AddReview.css';
+import './restaurantList.css'
 import { FaStar } from "react-icons/fa";
 import { headers } from '../../Global';
 import { useParams, useNavigate } from 'react-router-dom';
 
-function AddReview({ currentUser, restaurants }) {
+function AddReview({ currentUser }) {
   const [description, setDescription] = useState("");
   const [rating, setRating] =useState(null);
   const [hover, setHover] = useState(null);
@@ -29,8 +30,8 @@ function AddReview({ currentUser, restaurants }) {
 
   
   return (
-    <div className="reviewBody">
-      <h1>Add a new review...</h1>
+    <div className="review-body">
+      <h1 className='add-review-header'>Add a new review...</h1>
       <form onSubmit={handleAddReview}>
         <h3><label htmlFor='description' id="textbox">Write your review in the box below:</label></h3>
         <div>
@@ -62,7 +63,7 @@ function AddReview({ currentUser, restaurants }) {
             onChange={(e)=>setDescription(e.target.value)}
           />
           </div>
-          <button type="submit">Submit</button>
+          <button className="button" type="submit">Submit</button>
           <label html="user"></label>
           <input 
             type="hidden" 

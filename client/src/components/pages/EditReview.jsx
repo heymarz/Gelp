@@ -3,6 +3,7 @@ import  {FaStar} from "react-icons/fa";
 import { headers } from '../../Global';
 import { useParams, useNavigate } from 'react-router-dom';
 import './AddReview.css'
+import './restaurantList.css'
 
 function EditReview({review, onUpdateReview}) {
   const { rating, review_description } = review;
@@ -20,7 +21,7 @@ function EditReview({review, onUpdateReview}) {
       body: JSON.stringify({
           review: {
             review_description: comment,
-          rating: newRating,
+            rating: newRating,
         }})
     })
     .then((r)=>r.json())
@@ -62,7 +63,7 @@ function EditReview({review, onUpdateReview}) {
         onChange={(e)=>setComment(e.target.value)}
         />
         <br />
-        <input type="submit" value="Save" />
+        <input className="button" type="submit" value="Save" />
     </form>
   )
 }

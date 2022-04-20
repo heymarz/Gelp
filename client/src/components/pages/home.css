@@ -1,23 +1,12 @@
-#description {
-  height: 100px;
-  width: 500px
+.red-font {
+  color: red;
 }
-
-.star {
-  cursor: pointer;
-  transition: color 200ms;
-}
-
-input[type="radio"] {
-  display: none;
-}
-
-.review-body{
-  padding: 25px;
-}
-
-.add-review-header{
+.header{
+  text-align: center; 
   color: #FFCC00;
   background: #FFFFFF;
   text-shadow: 2px 2px 0 #4074b5, 2px -2px 0 #4074b5, -2px 2px 0 #4074b5, -2px -2px 0 #4074b5, 2px 0px 0 #4074b5, 0px 2px 0 #4074b5, -2px 0px 0 #4074b5, 0px -2px 0 #4074b5;
+}
+.body{
+  padding: 25px;
 }
