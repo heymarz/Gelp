@@ -43,9 +43,9 @@ This will run your rails server on port [http://localhost:4000](http://localhost
 
 5. Modify or delete a review that was posted
 
-6. Create a new restaurant listing
-
 ## Stretch Goal
+
+6. Create a new restaurant listing
 
 7. View restaurant on a map
 

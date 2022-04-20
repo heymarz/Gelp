@@ -9,11 +9,6 @@ class RestaurantsController < ApplicationController
     render json: restaurant
   end
 
-  def create
-    restaurant = Restaurant.create(restaurant_params)
-    render json: restaurant
-  end
-
   private
   def restaurant_params
     params.permit(:name, :food_type, :description)

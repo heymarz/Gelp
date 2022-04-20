@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  resources :restaurants, only: [:index, :show, :create]
+  resources :restaurants, only: [:index, :show]
   
   resources :reviews
   post '/restaurants/:restaurant_id/reviews', to: 'reviews#create'
