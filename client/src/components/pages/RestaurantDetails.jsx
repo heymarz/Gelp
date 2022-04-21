@@ -21,7 +21,7 @@ function RestaurantDetails({ currentUser, onUpdateReview }) {
       method: "DELETE",
     }).then(()=>{
     onUpdateReview(currentRestaurant.id, review_id)
-    navigate(0)
+    navigate("/")
     })
   }
 
@@ -32,7 +32,7 @@ function RestaurantDetails({ currentUser, onUpdateReview }) {
         <h3><em>{food_type}</em></h3>
         <p>{description}</p>
         <h2 className='opposing-title'>Reviews:</h2>
-        {isEditing ? (<EditReview review={isEditing} onUpdateReview={onUpdateReview}/>) : (<div>{reviews && reviews.map((review)=>{
+        {isEditing ? (<EditReview review={isEditing} setIsEditing={setIsEditing} onUpdateReview={onUpdateReview}/>) : (<div>{reviews && reviews.map((review)=>{
             return(
               <div className="reviewContainer" key={review.id}>
                 <div>{review.rating}

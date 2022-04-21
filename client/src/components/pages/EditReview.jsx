@@ -1,17 +1,16 @@
 import React, {useState} from 'react';
 import  {FaStar} from "react-icons/fa";
 import { headers } from '../../Global';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import './AddReview.css'
 import './restaurantList.css'
 
-function EditReview({review, onUpdateReview}) {
+function EditReview({review, setIsEditing, onUpdateReview}) {
   const { rating, review_description } = review;
   const [hover, setHover] = useState(null);
   const [comment, setComment] = useState(review_description);
   const [newRating, setNewRating] = useState(rating);
-  const { restaurant_id } = useParams(0);
-  let navigate = useNavigate();
+  const { restaurant_id } = useParams();
 
   function handleEditReview(e){
     e.preventDefault();
@@ -25,9 +24,10 @@ function EditReview({review, onUpdateReview}) {
         }})
     })
     .then((r)=>r.json())
-    .then((newReview)=>onUpdateReview(newReview.id, restaurant_id, newReview.review_description, newReview.newRating));
-    navigate(0)
-  }
+    .then((newReview)=>{
+      onUpdateReview(newReview.id, restaurant_id, newReview.review_description, newReview.newRating);
+      setIsEditing(false)
+  })}
 
   return (
     <form className="edit-review" onSubmit={handleEditReview}>
