@@ -7,7 +7,7 @@ import AddReview from "./components/pages/AddReview";
 import Home from "./components/pages/Home";
 import SignupForm from "./components/static/SignupForm";
 import RestaurantDetails from "./components/pages/RestaurantDetails";
-
+import ErrorPage from './components/static/ErrorPage'
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
