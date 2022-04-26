@@ -12,9 +12,11 @@ function NavBar({loggedIn, logoutUser}) {
       </nav>
     )
   }
-  function handleLogout(e){
-    e.preventDefault();
-    logoutUser();
+  function handleLogout(){
+    fetch("/logout", {
+      method: "DELETE",
+    })
+    .then(()=>logoutUser());
   }
 
   function loggedInLinks(){
