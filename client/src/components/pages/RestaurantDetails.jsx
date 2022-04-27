@@ -35,7 +35,7 @@ function RestaurantDetails({ currentUser, onUpdateReview }) {
         {isEditing ? (<EditReview review={isEditing} setIsEditing={setIsEditing} onUpdateReview={onUpdateReview}/>) : (<div>{reviews && reviews.map((review)=>{
             return(
               <div className="reviewContainer" key={review.id}>
-                <div>{review.rating}
+                <div>Rating: {review.rating} stars
               </div>
                 <p>{review.review_description}</p>
                 {currentUser.id === review.user_id ? <span><button className="button" onClick={()=>setIsEditing(review)}>Edit</button><button className="button" onClick={()=>handleDelete(review.id)}>Delete</button></span> : null}
