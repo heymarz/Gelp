@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import  {FaStar} from "react-icons/fa";
 import { headers } from '../../Global';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './AddReview.css'
 import './restaurantList.css'
 
@@ -11,6 +11,7 @@ function EditReview({review, setIsEditing, onUpdateReview}) {
   const [comment, setComment] = useState(review_description);
   const [newRating, setNewRating] = useState(rating);
   const { restaurant_id } = useParams();
+  const navigate = useNavigate();
 
   function handleEditReview(e){
     e.preventDefault();
@@ -27,6 +28,7 @@ function EditReview({review, setIsEditing, onUpdateReview}) {
     .then((newReview)=>{
       onUpdateReview(newReview.id, restaurant_id, newReview.review_description, newReview.newRating);
       setIsEditing(false)
+      navigate(`/`)
   })}
 
   return (
