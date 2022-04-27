@@ -18,6 +18,9 @@ function App() {
   function addErrors(errors){
     setErrors(errors)
   }
+  function clearErrors() {
+    setErrors([]);
+  }
 
   function loginUser(user){
     setCurrentUser(user);
@@ -68,6 +71,7 @@ function App() {
                 errors={errors}
                 loginUser={loginUser}
                 addErrors={addErrors}
+                clearErrors={clearErrors}
               />
             } 
           />
@@ -78,6 +82,7 @@ function App() {
                 errors={errors}
                 loginUser={loginUser}
                 addErrors={addErrors}
+                clearErrors={clearErrors}
               />
             } 
           />

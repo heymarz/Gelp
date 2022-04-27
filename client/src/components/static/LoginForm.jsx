@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {headers} from '../../Global';
 import {useNavigate} from "react-router-dom";
 import Errors from './Errors';
 import './forms.css'
 import '../pages/restaurantList.css'
 
-function LoginForm({ loginUser, addErrors, errors }) {
+function LoginForm({ loginUser, addErrors, errors, clearErrors }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,6 +33,9 @@ function LoginForm({ loginUser, addErrors, errors }) {
       }
     })
   }
+  useEffect(()=>{
+    return ()=> clearErrors()
+  },[])
 
   return (
    <div className='form'>

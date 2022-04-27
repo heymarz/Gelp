@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {headers} from '../../Global';
 import {useNavigate} from "react-router-dom";
 import Errors from './Errors';
 import './forms.css'
 
-function SignupForm({ loginUser, addErrors, errors }) {
+function SignupForm({ loginUser, addErrors, errors, clearErrors }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
@@ -34,6 +34,9 @@ function SignupForm({ loginUser, addErrors, errors }) {
     })
   } 
     
+  useEffect(()=>{
+    return ()=> clearErrors()
+  },[])
 
   return (
    <div className="form">
