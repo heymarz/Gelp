@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from "./components/navigation/NavBar";
 import LoginForm from './components/static/LoginForm'
@@ -14,24 +14,41 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [restaurants, setRestaurants] = useState([]);
   const [errors, setErrors] = useState([]);
-
+  
   function addErrors(errors){
     setErrors(errors)
   }
   function clearErrors() {
     setErrors([]);
   }
-
+  
   function loginUser(user){
     setCurrentUser(user);
     setLoggedIn(true);
   }
-
+  
   function logoutUser(){
     setCurrentUser({});
     setLoggedIn(false);
   }
-
+  
+    useEffect(()=>{
+      fetch('/me')
+      .then(res=>{
+        if(res.ok){
+          res.json().then(user => setCurrentUser(user))
+        }
+      })
+    },[])
+  
+  // if(!currentUser) return
+  // <LoginForm 
+  // errors={errors}
+  // loginUser={loginUser}
+  // addErrors={addErrors}
+  // clearErrors={clearErrors}
+  // />
+  
   function onUpdateReview (reviewId, restaurantId, newRating, newComment){
     const copy = [...restaurants];
     for (const restaurant of copy){
@@ -76,17 +93,6 @@ function App() {
             } 
           />
           <Route 
-            path="/login"  
-            element={
-              <LoginForm 
-                errors={errors}
-                loginUser={loginUser}
-                addErrors={addErrors}
-                clearErrors={clearErrors}
-              />
-            } 
-          />
-          <Route 
             path="restaurants/:restaurant_id/reviews/new" 
             element={
               <AddReview 
@@ -106,6 +112,15 @@ function App() {
            <Route 
             path="*" 
             element={<ErrorPage />} 
+          />
+          <Route
+          path="/login"
+          element={ <LoginForm 
+            errors={errors}
+            loginUser={loginUser}
+            addErrors={addErrors}
+            clearErrors={clearErrors}
+            />}
           />
         </Routes>
       </main>
