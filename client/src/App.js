@@ -36,7 +36,7 @@ function App() {
       fetch('/me')
       .then(res=>{
         if(res.ok){
-          res.json().then(user => setCurrentUser(user))
+          res.json().then(user => loginUser(user))
         }
       })
     },[])
