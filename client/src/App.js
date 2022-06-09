@@ -85,8 +85,8 @@ function App() {
             path="/signup" 
             element={
               <SignupForm 
-                errors={errors}
                 loginUser={loginUser}
+                errors={errors}
                 addErrors={addErrors}
                 clearErrors={clearErrors}
               />
