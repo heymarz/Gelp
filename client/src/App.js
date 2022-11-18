@@ -41,13 +41,6 @@ function App() {
       })
     },[])
   
-  // if(!currentUser) return
-  // <LoginForm 
-  // errors={errors}
-  // loginUser={loginUser}
-  // addErrors={addErrors}
-  // clearErrors={clearErrors}
-  // />
   
   function onUpdateReview (reviewId, restaurantId, newRating, newComment){
     const copy = [...restaurants];

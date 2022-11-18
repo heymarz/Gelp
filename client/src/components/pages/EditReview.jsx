@@ -13,23 +13,30 @@ function EditReview({review, setIsEditing, onUpdateReview}) {
   const { restaurant_id } = useParams();
   const navigate = useNavigate();
 
-  function handleEditReview(e){
-    e.preventDefault();
+  const paramsToEdit = {
+    review: {
+      review_description: comment,
+      rating: newRating,
+  }}
+
+  function fetchPatch(){
     fetch(`/reviews/${review.id}`, {
       method: "PATCH",
       headers: headers,
-      body: JSON.stringify({
-          review: {
-            review_description: comment,
-            rating: newRating,
-        }})
+      body: JSON.stringify(paramsToEdit)
     })
     .then((r)=>r.json())
     .then((newReview)=>{
       onUpdateReview(newReview.id, restaurant_id, newReview.review_description, newReview.newRating);
-      setIsEditing(false)
-      navigate(`/`)
-  })}
+    })
+  }  
+
+  function handleEditReview(e){
+    e.preventDefault();
+    fetchPatch()
+    setIsEditing(false)
+    navigate(`/`)
+  }
 
   return (
     <form className="edit-review" onSubmit={handleEditReview}>
