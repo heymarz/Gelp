@@ -19,7 +19,8 @@ function RestaurantDetails({ currentUser, onUpdateReview }) {
   function handleDelete(review_id){
     fetch(`/reviews/${review_id}`,{
       method: "DELETE",
-    }).then(()=>{
+    })
+    .then(()=>{
     onUpdateReview(currentRestaurant.id, review_id)
     navigate("/")
     })
